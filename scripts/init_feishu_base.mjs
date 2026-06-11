@@ -34,7 +34,7 @@ const tables = [
       user("Owner"),
       user("Tech Owner"),
       select("Priority", commonSelect.priority),
-      select("Source", ["Manual", "Sitemap", "SEO content workflow", "CMS", "Codebase"]),
+      select("Source", ["Manual", "Sitemap", "content SEO workflow", "CMS", "Codebase"]),
       date("Last Updated"),
       { name: "Notes", type: "text" },
     ],

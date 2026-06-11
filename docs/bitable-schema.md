@@ -1,8 +1,8 @@
 # 飞书多维表格结构方案
 
-适用范围：V2Fun 网站 URL 资产管理、技术 SEO、SEO 配置、关键词映射、重定向和上线追踪。
+适用范围：ExampleSite 网站 URL 资产管理、技术 SEO、SEO 配置、关键词映射、重定向和上线追踪。
 
-这个项目不替代现有 `SEO content workflow`。现有项目继续负责内容端产出；本项目负责网站 URL 和技术 SEO 管理。
+这个项目不替代现有 `content SEO workflow`。现有项目继续负责内容端产出；本项目负责网站 URL 和技术 SEO 管理。
 
 ## 1. URL资产主表
 
@@ -12,10 +12,10 @@
 
 | 字段名 | 字段类型 | 是否必填 | 说明 |
 | --- | --- | --- | --- |
-| Page ID | 文本 | 是 | 页面唯一 ID，例如 `feature_ai_3d_model_generator_en` |
-| Page Name | 文本 | 是 | 页面内部名称，例如 `AI 3D Model Generator - EN` |
+| Page ID | 文本 | 是 | 页面唯一 ID，例如 `feature_product_page_en` |
+| Page Name | 文本 | 是 | 页面内部名称，例如 `Product Feature Page - EN` |
 | Canonical URL | URL | 是 | 标准收录 URL |
-| URL Path | 文本 | 是 | 不含域名的路径，例如 `/en/features/ai-3d-model-generator` |
+| URL Path | 文本 | 是 | 不含域名的路径，例如 `/en/features/product-feature` |
 | Canonical Domain | 单选 | 是 | 建议默认 `example.com` |
 | Language | 单选 | 是 | `en`, `zh` |
 | Page Type | 单选 | 是 | 页面类型 |
@@ -29,7 +29,7 @@
 | Owner | 人员 | 否 | 负责人，默认你自己 |
 | Tech Owner | 人员 | 否 | 技术负责人 |
 | Priority | 单选 | 是 | `P0`, `P1`, `P2`, `P3` |
-| Source | 单选 | 否 | 来源：`Manual`, `Sitemap`, `SEO content workflow`, `CMS`, `Codebase` |
+| Source | 单选 | 否 | 来源：`Manual`, `Sitemap`, `content SEO workflow`, `CMS`, `Codebase` |
 | Last Updated | 日期 | 否 | 最后更新时间 |
 | Notes | 多行文本 | 否 | 备注 |
 
@@ -108,7 +108,7 @@ Not Required
 
 | 字段名 | 字段类型 | 是否必填 | 说明 |
 | --- | --- | --- | --- |
-| SEO Config ID | 文本 | 是 | 配置唯一 ID，例如 `seo_feature_ai_3d_model_generator_en` |
+| SEO Config ID | 文本 | 是 | 配置唯一 ID，例如 `seo_feature_product_page_en` |
 | Page ID | 关联记录/文本 | 是 | 关联 `URL资产主表.Page ID` |
 | Canonical URL | 查找/URL | 否 | 从 URL 主表带出 |
 | SEO URL | URL/文本 | 是 | 预期发布 URL 或正式 URL |
@@ -335,7 +335,7 @@ Cancelled
 
 ## 6. 内容页面需求表
 
-用途：承接内容端、Blog、专题页、落地页的新页面需求。后续可以与 `SEO content workflow` 做轻量同步，但现在先独立管理。
+用途：承接内容端、Blog、专题页、落地页的新页面需求。后续可以与 `content SEO workflow` 做轻量同步，但现在先独立管理。
 
 建议表名：`内容页面需求表`
 
@@ -470,5 +470,5 @@ Paused
 
 1. Sitemap 同步：每天抓取 sitemap，更新 `URL资产主表`。
 2. 技术检查：检查 HTTP、canonical、title、description、h1、robots、sitemap。
-3. SEO 配置同步：从 `内容页面需求表` 或 `SEO content workflow` 结果同步到 `SEO配置表`。
+3. SEO 配置同步：从 `内容页面需求表` 或 `content SEO workflow` 结果同步到 `SEO配置表`。
 

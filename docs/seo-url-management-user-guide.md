@@ -4,7 +4,7 @@
 
 ## 1. 系统定位
 
-「SEO URL 管理系统」是网站 SEO 资产管理系统，不是内容生产表。它主要用于管理 V2Fun 网站的 URL 资产、SEO 配置、技术 SEO 检查、重定向变更、关键词映射和页面需求。
+「SEO URL 管理系统」是网站 SEO 资产管理系统，不是内容生产表。它主要用于管理 ExampleSite 网站的 URL 资产、SEO 配置、技术 SEO 检查、重定向变更、关键词映射和页面需求。
 
 核心目标：
 
@@ -43,7 +43,7 @@
 | Page ID | 页面唯一 ID，其他表会用它做关联。不要随便改。 | 自动/人工 |
 | Page Name | 页面名称，方便人工识别。 | 人工 |
 | Canonical URL | 页面当前标准 URL。SEO 和技术都应以此为准。 | 自动/人工 |
-| URL Path | URL 路径，例如 `/en/features/ai-image-generator`。 | 自动 |
+| URL Path | URL 路径，例如 `/en/features/product-feature`。 | 自动 |
 | Canonical Domain | 规范域名，例如 `example.com`。 | 自动/人工 |
 | Language | 页面语言。 | 自动/人工 |
 | Page Type | 页面类型，例如 Feature、Use Case、Blog Detail、Help Detail。 | 自动/人工 |
@@ -57,7 +57,7 @@
 | Owner | SEO/内容负责人。 | 人工 |
 | Tech Owner | 技术负责人。 | 人工 |
 | Priority | 页面优先级。 | 自动/人工 |
-| Source | 数据来源，例如 Sitemap、Manual、SEO content workflow。 | 自动 |
+| Source | 数据来源，例如 Sitemap、Manual、content SEO workflow。 | 自动 |
 | Last Updated | 最近更新时间。 | 自动 |
 | Notes | 备注。 | 人工 |
 
