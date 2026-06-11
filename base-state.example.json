@@ -1,0 +1,33 @@
+{
+  "tables": [
+    {
+      "id": "tbl_xxx",
+      "name": "URL资产主表"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "技术SEO检查表"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "SEO配置表"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "重定向与URL变更表"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "配置字典"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "关键词地图表"
+    },
+    {
+      "id": "tbl_xxx",
+      "name": "内容页面需求表"
+    }
+  ],
+  "updatedAt": "2026-01-01T00:00:00.000Z"
+}

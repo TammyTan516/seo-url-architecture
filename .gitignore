@@ -1,0 +1,11 @@
+node_modules/
+.env
+base-state.json
+*-summary.json
+logs/
+*.log
+*.png
+*.xlsx
+*.xls
+*.csv
+.DS_Store
