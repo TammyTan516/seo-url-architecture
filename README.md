@@ -137,6 +137,12 @@ npm run sync:sitemap
 npm run check:technical
 ```
 
+把 AI content workflow 中 `Status = 已配置` 的 SEO 行同步到 `SEO配置表`：
+
+```bash
+npm run sync:ai-workflow
+```
+
 基于 canonical mismatch 生成重定向候选记录：
 
 ```bash
@@ -158,6 +164,7 @@ npm run check:redirects
 | 任务 | 建议频率 | 说明 |
 | --- | --- | --- |
 | Sitemap 同步 | 每天 1-2 次 | 捕捉新增页面、下线页面和 sitemap 变化 |
+| AI workflow -> SEO配置表 | 每小时或按需 | 把内容端已配置的 SEO 行同步到 URL 管理系统 |
 | 技术 SEO 检查 | 每天 1-2 次 | 检查状态码、索引信号、canonical 和 metadata |
 | 重定向校验 | 技术检查后运行 | 验证旧 URL 是否跳转到正确目标 |
 | SEO 配置复核 | 发布前或每日 | 确认 title、description、keyword、status |
@@ -349,6 +356,12 @@ Validate redirect records:
 npm run check:redirects
 ```
 
+Sync configured rows from an AI/content workflow sheet into the SEO config table:
+
+```bash
+npm run sync:ai-workflow
+```
+
 ### Automation
 
 The shell wrappers in `scripts/*.sh` can be used with cron, launchd, GitHub Actions, cloud functions, or any scheduler.
@@ -358,6 +371,7 @@ Recommended cadence:
 | Task | Cadence | Notes |
 | --- | --- | --- |
 | Sitemap sync | 1-2 times per day | Detect new pages, removed pages, and sitemap changes |
+| AI workflow -> SEO config | Hourly or on demand | Pull configured SEO rows from the content workflow into the URL management base |
 | Technical SEO checks | 1-2 times per day | Check status, indexability, canonical, and metadata |
 | Redirect validation | After technical checks | Validate old URL targets and redirect chains |
 | SEO config review | Before publishing or daily | Confirm title, description, keyword, and status |

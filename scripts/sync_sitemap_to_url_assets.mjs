@@ -12,10 +12,13 @@ const SITEMAP_URL = process.env.SEO_SITEMAP_URL || "https://example.com/sitemap.
 const CANONICAL_DOMAIN = process.env.SEO_CANONICAL_DOMAIN || "example.com";
 const WWW_DOMAIN = process.env.SEO_WWW_DOMAIN || `www.${CANONICAL_DOMAIN}`;
 
-const fields = fieldMap(URL_TABLE_ID);
+const fields = ensureFields(URL_TABLE_ID, [
+  datetime("Last Sitemap Sync At"),
+]);
 const existingRecords = listRecords(URL_TABLE_ID, fields);
 const sitemapUrls = await fetchSitemapUrls(SITEMAP_URL);
 const sitemapSet = new Set(sitemapUrls.map(normalizeUrl));
+const syncRunAt = nowForFeishu();
 
 const byUrl = new Map();
 for (const record of existingRecords) {
@@ -55,6 +58,7 @@ for (const url of sitemapSet) {
     "Priority": details.priority,
     "Source": "Sitemap",
     "Last Updated": today(),
+    "Last Sitemap Sync At": syncRunAt,
     "Notes": `Synced from sitemap: ${SITEMAP_URL}`,
   };
 
@@ -77,6 +81,7 @@ for (const record of existingRecords) {
   const status = fieldText(record, "Status");
 
   if (sitemapIncluded === "Missing" && status === "Needs Update") {
+    updateRecord(record.record_id, { "Last Sitemap Sync At": syncRunAt });
     report.skippedManualMissing += 1;
     continue;
   }
@@ -87,6 +92,7 @@ for (const record of existingRecords) {
     status === "Live";
 
   if (!shouldMarkMissing) {
+    updateRecord(record.record_id, { "Last Sitemap Sync At": syncRunAt });
     report.skippedManualMissing += 1;
     continue;
   }
@@ -96,6 +102,7 @@ for (const record of existingRecords) {
     "Status": "Needs Update",
     "Indexable": fieldText(record, "Indexable") || "TBD",
     "Last Updated": today(),
+    "Last Sitemap Sync At": syncRunAt,
     "Notes": appendNote(fieldText(record, "Notes"), `Missing from sitemap sync on ${today()}`),
   });
   report.markedMissing += 1;
@@ -161,6 +168,20 @@ function inferPageGroup(pageType) {
   if (pageType.includes("Blog")) return "Blog";
   if (pageType.includes("Help")) return "Help";
   return "Other";
+}
+
+function ensureFields(tableIdValue, fieldsToEnsure) {
+  const existing = fieldMap(tableIdValue);
+  for (const field of fieldsToEnsure) {
+    if (!existing.has(field.name)) {
+      cli(["base", "+field-create", "--base-token", BASE_TOKEN, "--table-id", tableIdValue, "--as", "user", "--format", "json", "--json", JSON.stringify(field)]);
+    }
+  }
+  return fieldMap(tableIdValue);
+}
+
+function datetime(name) {
+  return { name, type: "datetime", style: { format: "yyyy-MM-dd HH:mm" } };
 }
 
 function fieldMap(tableIdValue) {
@@ -240,6 +261,12 @@ function appendNote(existing, note) {
 
 function today() {
   return new Date().toISOString().slice(0, 10);
+}
+
+function nowForFeishu() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 function tableId(name) {

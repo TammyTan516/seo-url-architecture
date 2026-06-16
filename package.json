@@ -7,6 +7,7 @@
   "scripts": {
     "init:base": "node --env-file=.env scripts/init_feishu_base.mjs",
     "sync:sitemap": "node --env-file=.env scripts/sync_sitemap_to_url_assets.mjs",
+    "sync:ai-workflow": "node --env-file=.env scripts/sync_ai_workflow_to_seo_config.mjs",
     "check:technical": "node --env-file=.env scripts/run_technical_seo_check.mjs",
     "setup:redirects": "node --env-file=.env scripts/setup_redirect_change_table.mjs",
     "check:redirects": "node --env-file=.env scripts/run_redirect_url_change_check.mjs"
